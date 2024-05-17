@@ -33,8 +33,8 @@ https://github.com/YiChiang12/mhChatbot/assets/146417836/2e9d2adb-6366-4e32-a5a5
 To set up the project locally, you can clone this repository and follow the setup instructions:
 
 ```bash
-git clone https://github.com/yourusername/mental-health-chatbot.git
-cd mental-health-chatbot
+git clone https://github.com/YiChiang12/mhChatbot.git
+cd mhChatbot
 ```
 
 ## ✉️ Contact

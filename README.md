@@ -14,6 +14,11 @@ This project is currently **in progress**:
 - **Chatbot Interface**: Allows users to interact through a prototype interface where they can express feelings or ask questions.
 - **Backend Logic**: Utilizes OpenAI's GPT models to analyze and respond to user inputs.
 
+
+https://github.com/YiChiang12/mhChatbot/assets/146417836/2e9d2adb-6366-4e32-a5a5-268284010282
+
+
+
 ## 🛠 Technologies Used
 - **Svelte**: for building the interactive frontend.
 - **CSS/HTML**: for styling and markup.
@@ -31,10 +36,6 @@ To set up the project locally, you can clone this repository and follow the setu
 git clone https://github.com/yourusername/mental-health-chatbot.git
 cd mental-health-chatbot
 ```
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## ✉️ Contact
 

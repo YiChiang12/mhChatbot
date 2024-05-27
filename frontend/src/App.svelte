@@ -1,4 +1,19 @@
 <script>
+  import Chatbot from './Chatbot.svelte';
+</script>
+
+<div id="app">
+  <Chatbot />
+</div>
+
+
+
+
+
+
+
+
+<!-- <script>
   import { onMount } from 'svelte';
 
   let messages = [];
@@ -90,7 +105,7 @@
   .input-textbox[placeholder]:empty:focus::before {
       content: "";
   }
-  </style>
+  </style> -->
   
 
 
@@ -98,20 +113,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
 
 
 

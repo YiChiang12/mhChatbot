@@ -32,10 +32,8 @@ git clone https://github.com/yourusername/mental-health-chatbot.git
 cd mental-health-chatbot
 ```
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<!-- ## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
 
 ## ✉️ Contact
-
 Feel free to reach out to me at [yichiang@ucdavis.edu](mailto:yichiang@ucdavis.edu) or drop a message in the project's issues section on GitHub.

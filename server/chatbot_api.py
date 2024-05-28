@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 import json
+import os
 
 def create_app():
     app = Flask(__name__)
@@ -10,32 +11,57 @@ def create_app():
     try:
         with open("openai_api_key", "r") as file:
             openai.api_key = file.read().strip()
-    except FileNotFoundError:
-        print("API key file not found.")
-        raise
     except Exception as e:
-        print(f"Error reading API key: {e}")
+        print(f"Error reading API key")
         raise
 
     @app.route("/chat", methods=["POST"])
     def chat():
         conversation = request.json.get('messages', [])
         if not conversation:
-            return jsonify({"error": "No conversation provided"}), 400
-        print("Received conversation:", conversation)  # Log received data
+            return jsonify({"error": "No conversation provided"})
+        print("Received conversation:", conversation)  
         try:
             response = request_chatgpt(conversation)
             if response:
-                print("Sending response:", response)  # Log sent data
+                conversation.append({"from": "ai", "text": response})
+                # Save updated conversation to a file
+                save_conversation(conversation)
+                print("Sending response:", response)  
                 return jsonify({"response": response})
             else:
-                return jsonify({"error": "No response from model"}), 500
+                return jsonify({"error": "No response from model"})
         except Exception as e:
             print(f"Error handling request: {str(e)}")
-            return jsonify({"error": str(e)}), 500
-
+            return jsonify({"error": str(e)})
+        #     if response:
+        #         print("Sending response:", response)  # Log sent data
+        #         return jsonify({"response": response})
+        #     else:
+        #         return jsonify({"error": "No response from model"})
+        # except Exception as e:
+        #     print(f"Error handling request: {str(e)}")
+        #     return jsonify({"error": str(e)})
 
     return app
+
+def save_conversation(conversation):
+    # Clean and format the conversation
+    cleaned_conversation = []
+    for msg in conversation:
+        cleaned_msg = {
+            "from": msg["from"],
+            "text": msg["text"].replace('\u00a0', ' ')
+        }
+        cleaned_msg_ordered = dict([("from", cleaned_msg["from"]), ("text", cleaned_msg["text"])])
+        cleaned_conversation.append(cleaned_msg_ordered)
+    
+    # Ensure the 'scripts' directory exists
+    os.makedirs('scripts', exist_ok=True)
+    
+    # Save the conversation to a JSON file in the 'scripts' directory
+    with open('./scripts/conversation.json', 'w') as f:
+        json.dump(cleaned_conversation, f, indent=4)
 
 def request_chatgpt(conversation):
     # Convert the incoming message format to what OpenAI expects
@@ -68,7 +94,7 @@ def request_chatgpt(conversation):
 
 if __name__ == '__main__':
     app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=5000)  # Ensure it's listening on the correct interface
+    # app.run(debug=True, host='0.0.0.0', port=5000)  # Ensure it's listening on the correct interface
 
 
 

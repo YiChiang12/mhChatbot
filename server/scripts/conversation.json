@@ -1,0 +1,30 @@
+[
+    {
+        "from": "ai",
+        "text": "Hi! How are you feeling today?"
+    },
+    {
+        "from": "user",
+        "text": "hi"
+    },
+    {
+        "from": "ai",
+        "text": "Hello! How can I support you today?"
+    },
+    {
+        "from": "user",
+        "text": "I'm upset"
+    },
+    {
+        "from": "ai",
+        "text": "I'm sorry to hear that you're feeling upset. What's been bothering you?"
+    },
+    {
+        "from": "user",
+        "text": "I feel lonely that I think I don't have any friend that I can trust"
+    },
+    {
+        "from": "ai",
+        "text": "Feeling lonely can be tough, but it's important to remember that you're not alone in feeling that way. Building trust with friends can take time and effort. Have you tried reaching out to someone you feel a connection with? Communication and being open about your feelings can help in strengthening friendships. Additionally, engaging in activities you enjoy or joining social groups can also be a great way to meet new people and form connections. Remember, it's okay to take things one step at a time."
+    }
+]

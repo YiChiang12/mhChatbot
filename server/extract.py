@@ -7,21 +7,27 @@ def read_api():
     openai.api_key = api_key
 
 def request_gpt(messages):
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
-        return response.choices[0].message['content']
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
+    # try:
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+    return response.choices[0].message['content']
+    # except Exception as e:
+    #     print(f"Error: {e}")
+    #     return None
 
 # Extract problems and solutions from the conversation
 def extract_prob_sol(transcript):
-    transcript_str = "\n".join([f"{msg['from']}: {msg['text']}" for msg in transcript])
+    # transcript_str = "\n".join([f"{msg['from']}: {msg['text']}" for msg in transcript])
+    transcript_str = ""
+    for msg in transcript:
+        role = msg['from']
+        content = msg['text']
+        transcript_str += f'{role}: {content}\n'
     
-    prompt = """You are an assistant skilled in analyzing conversations for problem-solving.
+    prompt = """
+    You are an assistant skilled in analyzing conversations for problem-solving.
     Given a transcript of a conversation between a user and an AI, identify the main problems discussed and the solutions provided.
     Respond in the following JSON format:
     [
@@ -34,16 +40,22 @@ def extract_prob_sol(transcript):
     """
 
     messages = [
-        {'role': 'system', 'content': prompt},
-        {'role': 'user', 'content': transcript_str}
+        {
+            'role': 'system',
+            'content': prompt
+        },
+        {
+            'role': 'user',
+            'content': transcript_str
+        }
     ]
 
     extracted_data = request_gpt(messages)
-    # Parse JSON data
-    try:
-        problems_solutions = json.loads(extracted_data)
-    except json.JSONDecodeError:
-        problems_solutions = {"error": "Failed to decode the JSON response from GPT"}
+
+    # try:
+    problems_solutions = json.loads(extracted_data)
+    # except json.JSONDecodeError:
+    #     problems_solutions = {"error"}
     return problems_solutions
 
 def save_json(data, filepath):
@@ -68,6 +80,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 
 
 

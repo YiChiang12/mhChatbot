@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
 import json
-import os
+
 
 def create_app():
     app = Flask(__name__)
@@ -12,41 +12,36 @@ def create_app():
         with open("openai_api_key", "r") as file:
             openai.api_key = file.read().strip()
     except Exception as e:
-        print(f"Error reading API key")
+        print(f"Error reading the api key")
         raise
 
     @app.route("/chat", methods=["POST"])
     def chat():
         conversation = request.json.get('messages', [])
         if not conversation:
-            return jsonify({"error": "No conversation provided"})
-        print("Received conversation:", conversation)  
-        try:
-            response = request_chatgpt(conversation)
-            if response:
-                conversation.append({"from": "ai", "text": response})
-                # Save updated conversation to a file
-                save_conversation(conversation)
-                print("Sending response:", response)  
-                return jsonify({"response": response})
-            else:
-                return jsonify({"error": "No response from model"})
-        except Exception as e:
-            print(f"Error handling request: {str(e)}")
-            return jsonify({"error": str(e)})
+            return jsonify({"No conversation"})
+        # print(conversation)  
+        response = request_chatgpt(conversation)
+        if response:
+            conversation.append({"from": "ai", "text": response})
+            # Save new conversation to a file
+            save_conversation(conversation)
+            # print("response:", response)  
+            return jsonify({"response": response})
+        else:
+            return jsonify({"No response"})
         #     if response:
-        #         print("Sending response:", response)  # Log sent data
+        #         print("response:", response)
         #         return jsonify({"response": response})
         #     else:
-        #         return jsonify({"error": "No response from model"})
+        #         return jsonify({"No response"})
         # except Exception as e:
-        #     print(f"Error handling request: {str(e)}")
+        #     print(f"Error request: {str(e)}")
         #     return jsonify({"error": str(e)})
-
     return app
 
 def save_conversation(conversation):
-    # Clean and format the conversation
+    # Format the conversation
     cleaned_conversation = []
     for msg in conversation:
         cleaned_msg = {
@@ -56,45 +51,65 @@ def save_conversation(conversation):
         cleaned_msg_ordered = dict([("from", cleaned_msg["from"]), ("text", cleaned_msg["text"])])
         cleaned_conversation.append(cleaned_msg_ordered)
     
-    # Ensure the 'scripts' directory exists
-    os.makedirs('scripts', exist_ok=True)
-    
-    # Save the conversation to a JSON file in the 'scripts' directory
-    with open('./scripts/conversation.json', 'w') as f:
-        json.dump(cleaned_conversation, f, indent=4)
+    # Save the conversation to a JSON file
+    with open('./scripts/conversation.json', 'w') as fp:
+        json.dump(cleaned_conversation, fp, indent=4)
 
 def request_chatgpt(conversation):
-    # Convert the incoming message format to what OpenAI expects
-    formatted_messages = [
-        {"role": "assistant" if msg["from"] == "ai" else "user", "content": msg["text"]} for msg in conversation
+    transcript_str = ""
+    for msg in conversation:
+        role = "assistant" if msg["from"] == "ai" else "user"
+        content = msg["text"]
+        transcript_str += f'{role}: {content}\n'
+
+    # Stll need to modify the prompt (adding emoji and formatting to be readable)
+    system_prompt = """
+    You are a professional therapist, exceptionally skilled in listening and genuinely empathetic towards others.
+    You adeptly guide people towards solutions for their challenges and provide steadfast support during their difficult times.
+    Sometimes, you could be a bit hilarious and funny, but always professional.
+    Make sure you provide a response that is concise and conversational, advice should be clear and helpful.
+    """
+
+    # Combine the prompt with the conversation history
+    messages = [
+        {
+            "role": "system",
+            "content": system_prompt
+        },
+        {
+            "role": "user",
+            "content": transcript_str
+        }
     ]
+    # formatted_messages = []
+    # for msg in conversation:
+    #     role = "assistant" if msg["from"] == "ai" else "user"
+    #     content = msg["text"]
+    #     formatted_messages.append({"role": role, "content": content})
 
-    # System prompt for the therapist context
-    system_prompt = {
-        "role": "system",
-        "content": """You are a professional therapist, exceptionally skilled in listening and genuinely empathetic towards others.
-                      You adeptly guide people towards solutions for their challenges and provide steadfast support during their difficult times.
-                      Sometimes, you could be a bit hilarious and funny, but always professional.
-                      Make sure you provide a response that is concise and conversational, advice should be clear and helpful."""
-    }
+    # # Stll need to modify the prompt (adding emoji and formatting)
+    # prompt = {
+    #     "role": "system",
+    #     "content": """You are a professional therapist, exceptionally skilled in listening and genuinely empathetic towards others.
+    #                   You adeptly guide people towards solutions for their challenges and provide steadfast support during their difficult times.
+    #                   Sometimes, you could be a bit hilarious and funny, but always professional.
+    #                   Make sure you provide a response that is concise and conversational, advice should be clear and helpful."""
+    # }
 
-    # Add the system message at the start of the conversation
-    messages = [system_prompt] + formatted_messages
+    # # Combine the prompt at with the conversation history
+    # messages = [prompt] + formatted_messages
 
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=messages
-        )
-        return response.choices[0].message['content'] if response.choices else "No content returned from API"
-    except Exception as e:
-        print(f"OpenAI API request failed: {e}")
-        return f"Error in connecting with OpenAI API: {str(e)}"
+    # try:
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=messages
+    )
+    return response.choices[0].message['content']   # if response.choices else "No content"
+    # except Exception as e:
+    #     # print(f"API request failed: {e}")
+    #     return f"Error api"
 
-
-if __name__ == '__main__':
-    app = create_app()
-    # app.run(debug=True, host='0.0.0.0', port=5000)  # Ensure it's listening on the correct interface
+app = create_app()
 
 
 

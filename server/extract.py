@@ -22,8 +22,8 @@ def extract_prob_sol(transcript):
     # transcript_str = "\n".join([f"{msg['from']}: {msg['text']}" for msg in transcript])
     transcript_str = ""
     for msg in transcript:
-        role = msg['from']
-        content = msg['text']
+        role = msg['role']
+        content = msg['content'].replace('\n', ' ')
         transcript_str += f'{role}: {content}\n'
     
     prompt = """
@@ -39,16 +39,7 @@ def extract_prob_sol(transcript):
     Here is the transcript:
     """
 
-    messages = [
-        {
-            'role': 'system',
-            'content': prompt
-        },
-        {
-            'role': 'user',
-            'content': transcript_str
-        }
-    ]
+    messages = [{'role': 'system', 'content': prompt + transcript_str}]
 
     extracted_data = request_gpt(messages)
 

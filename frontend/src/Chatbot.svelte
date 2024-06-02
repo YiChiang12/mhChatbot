@@ -1,8 +1,15 @@
 <script>
     import { onMount, tick } from 'svelte';
+    import { marked } from 'marked';
 
-    let messages = [];
+    let display_messages = [];
+    let query_messages = [];
     let messageContainer;
+
+    // Convert Markdown to HTML
+    function convertMarkdownToHtml(markdownText) {
+        return marked(markdownText);
+    }
 
     async function sendMessage() {
         const messageText = document.querySelector('.input-textbox').textContent.trim();
@@ -10,10 +17,12 @@
 
         document.querySelector('.input-textbox').textContent = '';
 
-        // Add user message to the array and update the UI
-        messages = [...messages, { text: messageText, from: 'user' }];
+        // Add user message to display and query arrays
+        let userMessage = { content: messageText, role: 'user' };
+        display_messages = [...display_messages, userMessage];
+        query_messages = [...query_messages, userMessage];
 
-        // Scroll to the bottom as soon as the user message is added
+        // Scroll to the bottom when the user message is added
         await tick();
         scrollToBottom();
 
@@ -21,15 +30,19 @@
         const response = await fetch('http://127.0.0.1:5000/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ messages })
+            body: JSON.stringify({ messages: query_messages, user_input: messageText  })
         });
 
         const data = await response.json();
 
         // Add AI response to the messages array
-        messages = [...messages, { text: data.response, from: 'ai' }];
+        if (data.response) {
+            let aiMessage = { content: data.response, role: 'system' };
+            display_messages = [...display_messages, aiMessage];
+            query_messages = [...query_messages, aiMessage];
+        }
 
-        // Wait for UI to update and then scroll to the bottom again
+        // Wait for UI to update and then scroll to the bottom
         await tick();
         scrollToBottom();
     }
@@ -41,20 +54,22 @@
     }
 
     onMount(() => {
-        messages = [{ text: "Hi! How are you feeling today?", from: 'ai' }];
+        let systemMessage = { content: "Hi! How are you feeling today?", role: 'system' };
+        display_messages = [systemMessage];
+        query_messages = [systemMessage];
         scrollToBottom();
     });
 </script>
 
 <div class="chat-container">
     <div bind:this={messageContainer} class="messages">
-        {#each messages as message (message.text)}
-        <div class={`message ${message.from === 'user' ? 'user-message' : 'ai-message'}`}>
-            {#if message.from === 'ai'}
+        {#each display_messages as message}
+        <div class={`message ${message.role === 'user' ? 'user-message' : 'ai-message'}`}>
+            {#if message.role === 'system'}
                 <img src='robot.svg' alt="robot" />
             {/if}
-            <p>{message.text}</p>
-            {#if message.from === 'user'}
+            <p>{@html convertMarkdownToHtml(message.content)}</p>
+            {#if message.role === 'user'}
                 <img src='user.svg' alt="user" />
             {/if}
         </div>
@@ -86,50 +101,58 @@
         border-top: 1px solid #b2a5a5;
         column-gap: 1rem;
     }
+
     .input-textbox[placeholder]:empty::before {
         content: attr(placeholder);
         color: #555; 
     }
+
     .input-textbox[placeholder]:empty:focus::before {
         content: "";
     }
+
     .chat-container {
         font-family: 'Comic Sans MS', cursive;
         display: flex;
         flex-direction: column;
         height: 98vh;
-        width: 47%;
+        width: 46%;
         background-color: #d8e4f6;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         overflow: hidden;
     }
+
     .messages {
-        font-size: 12px;
+        font-size: 14px;
         flex-grow: 1;
         overflow-y: auto;
         padding: 20px;
         display: flex;
         flex-direction: column;
     }
+
     .message {
-        padding: 10px;
+        padding: 8px;
         border-radius: 16px;
         margin-bottom: 12px;
         display: flex;
         gap: 0.5rem;
     }
+
     .user-message {
         background-color: #fff;
         color: black;
         margin-left: auto;
     }
+
     .ai-message {
         text-align: left;
         background-color: #fff;
         color: black;
         margin-right: auto;
     }
+
     .input-textbox {
         font-family: 'Comic Sans MS', cursive;
         border-radius: 0.35rem;
@@ -141,6 +164,7 @@
         height: 28px;
         overflow-y: auto;
     }
+
     button {
     font-family: 'Comic Sans MS', cursive;
     padding: 10px 20px; 
@@ -149,6 +173,7 @@
     border: 2px solid rgb(25, 23, 23);
     border-radius: 4px;
     }
+    
     button:hover {
     background-color: #F0F0F0; /* Gray for hover effect */
     }

@@ -1,30 +1,34 @@
 [
     {
-        "from": "ai",
-        "text": "Hi! How are you feeling today?"
+        "role": "system",
+        "content": "Hi! How are you feeling today?"
     },
     {
-        "from": "user",
-        "text": "hi"
+        "role": "user",
+        "content": "hi"
     },
     {
-        "from": "ai",
-        "text": "Hello! How can I support you today?"
+        "role": "system",
+        "content": "It seems like you might be feeling a bit low or maybe not in the mood to chat. It's okay, we can take things at your pace. What's on your mind today?"
     },
     {
-        "from": "user",
-        "text": "I'm upset"
+        "role": "user",
+        "content": "can you give me some suggestion on how to organize my task?"
     },
     {
-        "from": "ai",
-        "text": "I'm sorry to hear that you're feeling upset. What's been bothering you?"
+        "role": "system",
+        "content": "Absolutely! Organizing tasks can make a world of difference. Here are a few tips to help you get on top of things:\n\n1. **Make a To-Do List**: Write down all your tasks, big or small. Seeing them on paper (or digitally) can help you prioritize and feel more organized.\n\n2. **Prioritize Tasks**: Identify the most important or time-sensitive tasks and tackle those first. You can use techniques like the Eisenhower Matrix (urgent vs. important) to prioritize effectively.\n\n3. **Break Tasks into Smaller Steps**: If a task seems overwhelming, break it down into smaller, more manageable steps. This can make it easier to start and progress.\n\n4. **Set Deadlines**: Assign realistic deadlines to your tasks. This can help create a sense of urgency and keep you focused.\n\n5. **Use Technology**: Consider using task management apps or tools like Trello, Todoist, or Google Keep to help you stay organized and track your progress.\n\nStart small, find what works best for you, and don't forget to celebrate your victories along the way! \ud83c\udf1f"
     },
     {
-        "from": "user",
-        "text": "I feel lonely that I think I don't have any friend that I can trust"
+        "role": "user",
+        "content": "if I feel lonely how can I do?"
     },
     {
-        "from": "ai",
-        "text": "Feeling lonely can be tough, but it's important to remember that you're not alone in feeling that way. Building trust with friends can take time and effort. Have you tried reaching out to someone you feel a connection with? Communication and being open about your feelings can help in strengthening friendships. Additionally, engaging in activities you enjoy or joining social groups can also be a great way to meet new people and form connections. Remember, it's okay to take things one step at a time."
+        "role": "user",
+        "content": "if I feel lonely how can I do?"
+    },
+    {
+        "role": "system",
+        "content": "Feeling lonely is tough, but there are steps you can take to help combat those feelings:\n\n1. **Reach Out**: Don't hesitate to connect with friends, family, or a support group. A simple chat or meet-up can make a big difference.\n\n2. **Get Involved**: Join clubs, classes, or groups that align with your interests. This can help you meet like-minded people and form new connections.\n\n3. **Volunteer**: Helping others can lift your spirits and introduce you to a supportive community.\n\n4. **Self-Care**: Take care of yourself physically and emotionally. Engage in activities you enjoy, practice mindfulness, and get enough rest.\n\n5. **Professional Help**: If feelings of loneliness persist or become overwhelming, consider talking to a therapist or counselor. It's okay to seek support when you need it.\n\nRemember, it's okay to feel lonely sometimes, but reaching out and taking steps to connect can make a big difference. You're not alone in feeling lonely! \ud83c\udf1f"
     }
 ]

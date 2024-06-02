@@ -1,6 +1,10 @@
 [
     {
-        "problem": "Lack of engagement or interaction from the user",
-        "solution": "Encourage the user to share their thoughts or feelings to initiate a conversation"
+        "problem": "User seeks suggestions on how to organize tasks",
+        "solution": "Provided tips on organizing tasks such as making a to-do list, prioritizing tasks, breaking tasks into smaller steps, setting deadlines, and using technology like task management apps."
+    },
+    {
+        "problem": "User expresses feeling lonely",
+        "solution": "Suggested steps to combat feelings of loneliness including reaching out to others, getting involved in activities or groups, volunteering, practicing self-care, and seeking professional help if needed."
     }
 ]

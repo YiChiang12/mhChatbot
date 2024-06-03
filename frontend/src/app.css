@@ -1,4 +1,30 @@
-.root {
+body, html {
+  margin: 0px;
+  padding: 5px;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden; /* Prevents scrol on the entire webpage */
+}
+
+#app {
+  width: 100%;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chat-container {
+  width: 50%;
+}
+
+.problems-solutions-container {
+  width: 50%;
+}
+
+
+
+
+/* .root {
   margin: 0;
   padding: 0;
   display: flex;
@@ -14,9 +40,9 @@
   width: 100%; 
   display: flex;
   justify-content: start; /* Align the chatbot to the left */
-}
 
-button {
+
+/* button {
   font-size: 16px;
   padding: 8px 16px;
   background-color: #f2f2f2;
@@ -27,7 +53,7 @@ button {
 
 button:hover {
   background-color: #e2e2e2; /* Light gray */
-}
+
 
 /* a {
   color: #0077cc;

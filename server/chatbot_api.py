@@ -1,11 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory  
 from flask_cors import CORS
 import openai
 import json
+import os
 
 
 def create_app():
     app = Flask(__name__)
+    # CORS(app)
     CORS(app)
 
     try:
@@ -13,13 +15,13 @@ def create_app():
             openai.api_key = file.read().strip()
     except Exception as e:
         print(f"Error reading the api key")
-        raise
+        raise e
 
     @app.route("/chat", methods=["POST"])
     def chat():
         conversation = request.json.get('messages', [])
         if not conversation:
-            return jsonify({"No conversation"})
+            return jsonify({"No conversation"}), 400
         # print(conversation)  
         user_input = request.json.get('user_input', '')
         if user_input:
@@ -37,6 +39,25 @@ def create_app():
         else:
             return jsonify({"No response from model"}), 500
    
+    @app.route("/data/extracted_prob_sol.json", methods=["GET"])
+    def send_json():
+        directory = os.path.join(app.root_path, 'data')
+        try:
+            return send_from_directory(directory, 'extracted_prob_sol.json')
+        except FileNotFoundError:
+            return jsonify({"error": "File not found"}), 404
+    # @app.route("/data/extracted_prob_sol.json", methods=["GET"])
+    # def send_json():
+    #     try:
+    #         return send_from_directory(
+    #             os.path.join(app.root_path, 'data'),
+    #             'extracted_prob_sol.json',
+    #             as_attachment=False
+    #         )
+    #     except FileNotFoundError:
+    #         return jsonify({"error": "File not found"}), 404
+
+    
     return app
 
 def save_conversation(conversation):

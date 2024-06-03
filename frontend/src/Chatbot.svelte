@@ -115,12 +115,13 @@
         font-family: 'Comic Sans MS', cursive;
         display: flex;
         flex-direction: column;
-        height: 98vh;
-        width: 46%;
+        height: 98%;
         background-color: #d8e4f6;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         overflow: hidden;
+        overflow-y: auto;
+        max-height: 100%;
     }
 
     .messages {

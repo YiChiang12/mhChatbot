@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "flowbite-svelte": "^0.46.1",
     "lucide-svelte": "^0.378.0",
     "marked": "^12.0.2"
   }

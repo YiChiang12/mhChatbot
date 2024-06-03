@@ -1,10 +1,39 @@
 [
     {
-        "problem": "User seeks suggestions on how to organize tasks",
-        "solution": "Provided tips on organizing tasks such as making a to-do list, prioritizing tasks, breaking tasks into smaller steps, setting deadlines, and using technology like task management apps."
+        "problem": "Feeling stressed and overwhelmed due to end-of-quarter tasks",
+        "solution": [
+            "Prioritize tasks based on urgency and importance",
+            "Break down big tasks into smaller, manageable ones",
+            "Use a planner or digital calendar for time management",
+            "Practice self-care by getting enough sleep, eating well, and taking breaks",
+            "Talk to friends, family, or a counselor for support"
+        ]
     },
     {
-        "problem": "User expresses feeling lonely",
-        "solution": "Suggested steps to combat feelings of loneliness including reaching out to others, getting involved in activities or groups, volunteering, practicing self-care, and seeking professional help if needed."
+        "problem": "Struggling with falling behind on tasks and noisy roommate affecting sleep",
+        "solution": [
+            "Communicate with the roommate about the noise issue and establish quiet hours",
+            "Try time blocking for task management and flexibility",
+            "Use earplugs or soothing music to drown out noise",
+            "Remember to ask for what you need for your well-being"
+        ]
+    },
+    {
+        "problem": "Feeling homesick and lonely, missing family and struggling to make new friends",
+        "solution": [
+            "Schedule regular video calls with family and friends to stay connected",
+            "Establish a routine for comfort and structure",
+            "Explore new surroundings, activities, or make new friends",
+            "Start small with attending virtual events or reaching out to classmates for connections",
+            "Join clubs or groups based on interests to meet like-minded individuals"
+        ]
+    },
+    {
+        "problem": "Nervous about fitting in and making new friends in the photography club",
+        "solution": [
+            "Use photography as a common interest to start conversations",
+            "Be yourself, show genuine interest, and let connections flow naturally",
+            "Take it one step at a time and embrace the opportunity for new friendships"
+        ]
     }
 ]

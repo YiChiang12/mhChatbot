@@ -265,7 +265,6 @@
         text-align: left;
         background-color: #fcfdfe;
         border-bottom: 2px solid #bed0ed;
-        text-align: left;
         font-size: 19px;
         color: #747578;
         position: relative;
@@ -276,7 +275,6 @@
         display: flex;
         border-top: 1px solid #b2a5a5;
         column-gap: 1rem;
-
         padding: 25px 35px 1px 25px;
         /* margin-bottom: 20px; */
     }

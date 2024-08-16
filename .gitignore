@@ -157,3 +157,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# conversation.json
+# conversations.json
+# scene.json
+# scene*.json
+# script.json
+# script*.json
+
+scripts/

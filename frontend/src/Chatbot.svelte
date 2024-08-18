@@ -6,14 +6,40 @@
   let query_messages = [];
   let messageContainer;
   let showModal = false;
+  let isUserAtBottom = true;
+  let showScrollDownButton = false;
 
   let current_step = "";
+
   function clearChat() {
     showModal = true;
   }
 
   function cancelClear() {
     showModal = false;
+  }
+
+  function checkScrollPosition() {
+    if (messageContainer) {
+        const { scrollTop, scrollHeight, clientHeight } = messageContainer;
+        // Check if the user is at the bottom or very close to it
+        isUserAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
+        showScrollDownButton = !isUserAtBottom;
+    }
+  }
+
+  function scrollToBottomIfNeeded() {
+    if (isUserAtBottom) {
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+  }
+
+  function scrollToBottom() {
+    if (messageContainer) {
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+    isUserAtBottom = true;
+    showScrollDownButton = false;
   }
 
   async function confirmClear() {
@@ -36,6 +62,7 @@
         ];
         query_messages = [];
         showModal = false;
+        // scrollToBottomIfNeeded();
         scrollToBottom();
       } else {
         console.error("Fail to clear chat:", data.message);
@@ -81,7 +108,7 @@
 
       // Scroll to the bottom when the user message is added
       await tick();
-      scrollToBottom();
+      scrollToBottomIfNeeded();
 
       const response = await fetch("http://127.0.0.1:5000/chat/", {
         method: "POST",
@@ -107,7 +134,7 @@
       }
       // After AI response, scroll to the bottom
       await tick();
-      scrollToBottom();
+      scrollToBottomIfNeeded();
     } catch (error) {
       console.error("Failed to send message:", error);
     }
@@ -121,17 +148,11 @@
       aiMessage.content += response[i];
       display_messages = [...display_messages];
       await tick();
-      scrollToBottom();
+      scrollToBottomIfNeeded();
       await new Promise((resolve) => setTimeout(resolve, 13));
     }
 
     query_messages = [...query_messages, aiMessage];
-  }
-
-  function scrollToBottom() {
-    if (messageContainer) {
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
   }
 
   onMount(() => {
@@ -143,6 +164,7 @@
     display_messages = [systemMessage];
     query_messages = [systemMessage];
     scrollToBottom();
+    messageContainer.addEventListener("scroll", checkScrollPosition);
   });
 </script>
 
@@ -185,6 +207,11 @@
   </div>
 
   <div class="input-area">
+    {#if showScrollDownButton}
+      <button class="scroll-down-btn" on:click={scrollToBottom} aria-label="Scroll Down">
+        <img src="arrow_down.svg" alt="Scroll Down Icon" />
+      </button>
+    {/if}
     <div
       role="textbox"
       tabindex="0"
@@ -200,6 +227,7 @@
     ></div>
     <button on:click={sendMessage}>Send</button>
   </div>
+  
   <div class="chat-disclaimer">
     This is a chatbot, not a licensed professional. If you need to talk to
     someone, please contact the 24/7 crisis lifeline at <a href="tel:988">988</a
@@ -218,6 +246,7 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
   }
 
   .modal-content {
@@ -226,6 +255,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    z-index: 1001;
   }
   .modal-buttons {
     display: flex;
@@ -240,7 +270,9 @@
     height: 24px;
     cursor: pointer;
     position: absolute;
-    top: 50%;
+    /* top: 50%;
+    right: 40px; */
+    top: 25px;
     right: 40px;
     transform: translateY(-50%);
     background: none;
@@ -249,6 +281,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    z-index: 10;
   }
 
   .clear-chat-btn：hover {
@@ -297,7 +331,8 @@
     border-top: 1px solid #b2a5a5;
     column-gap: 1rem;
     padding: 25px 35px 1px 25px;
-    /* margin-bottom: 20px; */
+    align-items: flex-end;
+    position: relative;
   }
 
   .chat-disclaimer {
@@ -345,7 +380,6 @@
     margin-left: 25%;
     padding-bottom: 80px;
     position: relative;
-
     margin: 0 auto;
   }
   .messages {
@@ -395,10 +429,12 @@
     background-color: white;
     border: 2px solid black;
     text-align: left;
-    height: 28px;
+    min-height: 28px;
+    max-height: 160px;
     overflow-y: auto;
     padding-left: 15px;
     font-size: 16px;
+    resize: none;
   }
 
   button {
@@ -409,11 +445,33 @@
     border: 2px solid rgb(25, 23, 23);
     border-radius: 4px;
     font-size: 16px;
+    flex-shrink: 0;
+    height: auto;
   }
 
   button:hover {
     background-color: #f0f0f0; /* Gray for hover effect */
   }
+
+  .scroll-down-btn {
+    position: absolute;
+    left: 50%;
+    top: -60px;
+    /* bottom: 1px; */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 60%;
+    background-color: rgba(249, 246, 246, 0.919);
+    z-index: 10;
+  }
+
+  .scroll-down-btn img {
+    width: 36px;
+    height: 36px;
+  }
+
   .current-step {
   }
 </style>

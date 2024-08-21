@@ -9,7 +9,7 @@
   let isUserAtBottom = true;
   let showScrollDownButton = false;
 
-  let current_step = "";
+  // let current_step = "";
 
   function clearChat() {
     showModal = true;
@@ -97,9 +97,7 @@
 
   async function sendMessage() {
     try {
-      const messageText = document
-        .querySelector(".input-textbox")
-        .textContent.trim();
+      const messageText = document.querySelector(".input-textbox").textContent.trim();
       if (!messageText) return;
       document.querySelector(".input-textbox").textContent = "";
       let userMessage = { content: messageText, role: "user" };
@@ -115,13 +113,13 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: query_messages,
-          user_input: messageText,
-          current_step: current_step,
-        }),
+          user_input: messageText
+          // current_step: current_step,
+        })
       });
 
       const data = await response.json();
-      current_step = data.current_step;
+      // current_step = data.current_step;
 
       // Add AI response
       // if (data.response) {
@@ -171,7 +169,7 @@
 <div class="chat-container">
   <div class="chat-title">
     Eunoia Chatbot
-    <div class="current-step">{current_step}</div>
+    <!-- <div class="current-step">{current_step}</div> -->
     <button class="clear-chat-btn" on:click={clearChat} aria-label="Clear Chat">
       <img src="delete.svg" alt="Clear Chat Icon" />
     </button>
@@ -230,8 +228,7 @@
   
   <div class="chat-disclaimer">
     This is a chatbot, not a licensed professional. If you need to talk to
-    someone, please contact the 24/7 crisis lifeline at <a href="tel:988">988</a
-    >.
+    someone, please contact the 24/7 crisis lifeline at <a href="tel:988">988</a>.
   </div>
 </div>
 
@@ -281,7 +278,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
     z-index: 10;
   }
 
@@ -471,7 +467,7 @@
     width: 36px;
     height: 36px;
   }
-
-  .current-step {
-  }
+  /* .current-step {
+  } */
+  
 </style>

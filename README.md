@@ -1,6 +1,6 @@
 # Eunoia: Mental Health Crisis Intervention Chatbot
 
-![Figma Design](images/figma_design.png "Figma Design for Chatbot")
+![Figma Design](images/figma_chatbotDesign.png "Figma Design for Chatbot")
 
 Welcome to **Eunoia**, a mental health chatbot that leverages the **GPT-4o-mini model** to support young adults in crisis. Eunoia follows a professionally-guided seven-step crisis intervention process. It can respond to user emotions, providing an empathetic and tailored conversational experience. The ultimate goal is to enhance the user's willingness to seek professional help.
 

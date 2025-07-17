@@ -71,9 +71,10 @@ To set up the project locally, follow these steps:
 ## 🎥 Video Demonstration
 [![Eunoia Chatbot Demo](images/videoFrame.png)](https://drive.google.com/file/d/1pduU65QJt_a_iy_PcLj_bGmBGs92FpsC/view "Eunoia Chatbot Demo")
 
-## License
-This project is licensed under the [MIT License](LICENSE.md) © [2025] [Yi-Hsuan Chiang].
-
 
 ## ✉️ Contact
 Feel free to reach out to me at [yichiang@ucdavis.edu](mailto:yichiang@ucdavis.edu) or drop a message in the project's issues section on GitHub.
+
+
+## License
+This project is licensed under the [MIT License](LICENSE.md) © [2025] [Yi-Hsuan Chiang].

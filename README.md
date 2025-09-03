@@ -2,7 +2,7 @@
 
 ![Figma Design](images/figma_chatbotDesign.png "Figma Design for Chatbot")
 
-Welcome to **Eunoia**, a mental health chatbot that leverages the **GPT-4o-mini model** to support young adults in crisis. Eunoia follows a professionally-guided seven-step crisis intervention process. It can respond to user emotions, providing an empathetic and tailored conversational experience. The ultimate goal is to enhance the user's willingness to seek professional help.
+Welcome to **Eunoia**, a mental health chatbot that leverages the **GPT-4o-mini model** to support young adults in crisis. Eunoia follows a professionally guided seven-step crisis intervention process. It can respond to user emotions, providing an empathetic and tailored conversational experience. The ultimate goal is to enhance the user's willingness to seek professional help.
 
 ## 🚧 Project Status
 
@@ -15,7 +15,7 @@ This project is currently **in progress**:
 ## 📌 Implementation Highlights
 
 - **Chatbot Interface**: Allows users to interact through a prototype interface where they can express their suicidal thoughts, any feelings, ask questions, or seek help.
-- **Backend Logic**: Utilizes OpenAI's GPT models to analyze the user's current stage (with suicidal tendencies) and using the corresponding prompt for each stage to provide user the response.
+- **Backend Logic**: Utilizes OpenAI's GPT models to analyze the user's current stage (with suicidal tendencies) and uses the corresponding prompt for each stage to provide user the response.
 
 1. **Seven-Step Process**: Eunoia uses a structured, seven-step process aligned with professional crisis intervention guidelines:
     - Step 1: Suicidal Ideation
@@ -39,9 +39,9 @@ This project is currently **in progress**:
 - **Flask**: Backend API to handle requests.
 - **OpenAI's GPT-4o-mini**: For generating AI-based responses and analyzing conversations.
 
-## 📈 Future Plans
+## 📈 Professional Evaluation
 
-- **Professional Evaluation**: The chatbot will undergo a review by mental health professionals. Based on their feedback, we may refine the crisis intervention process.
+- The chatbot underwent a review by mental health professionals. Based on their feedback, we refined the crisis intervention process.
 
 ## 🏁 Getting Started
 

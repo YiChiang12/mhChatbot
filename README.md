@@ -41,7 +41,7 @@ This project is currently **in progress**:
 
 ## 📈 Professional Evaluation
 
-- The chatbot underwent a review by mental health professionals. Based on their feedback, we refined the crisis intervention process.
+- The chatbot underwent reviews by mental health professionals. Based on their feedback, we refined the crisis intervention process.
 
 ## 🏁 Getting Started
 

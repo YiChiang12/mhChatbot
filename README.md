@@ -73,7 +73,7 @@ To set up the project locally, follow these steps:
 
 
 ## ✉️ Contact
-Feel free to reach out to me at [yichiang@ucdavis.edu](mailto:yichiang@ucdavis.edu) or drop a message in the project's issues section on GitHub.
+Feel free to reach out to me at [yc2933@cornell.edu](mailto:yc2933@cornell.edu) or drop a message in the project's issues section on GitHub.
 
 
 ## License

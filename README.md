@@ -69,7 +69,10 @@ To set up the project locally, follow these steps:
 4. **Open `localhost:5173`** in your browser.
 
 ## 🎥 Video Demonstration
-[![Eunoia Chatbot Demo](images/videoFrame.png)](https://drive.google.com/file/d/1pduU65QJt_a_iy_PcLj_bGmBGs92FpsC/view "Eunoia Chatbot Demo")
+[![Eunoia Chatbot Demo](images/videoFrame.png)](https://drive.google.com/file/d/1yICYajUg0vdrS-B54NZJ7WxKxSZ8rpah/preview "Eunoia Chatbot Demo")
+
+<!-- [![Eunoia Chatbot Demo](images/videoFrame.png)](https://drive.google.com/file/d/1pduU65QJt_a_iy_PcLj_bGmBGs92FpsC/view "Eunoia Chatbot Demo")
+-->
 
 
 ## ✉️ Contact

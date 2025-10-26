@@ -6,7 +6,7 @@ Welcome to **Eunoia**, a mental health chatbot that leverages the **GPT-4o-mini 
 
 ## 🚧 Project Status
 
-This project is currently **in progress**:
+This project is currently **finished**:
 - **Frontend**: Built using Svelte, CSS, and HTML.
 - **Backend**: Integrated with OpenAI's GPT-4o-mini model for responses based on user input.
 - **Next Steps**: The project will undergo a professional evaluation to assess whether adjustments to the crisis intervention process are needed.
